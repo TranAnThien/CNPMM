@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Người Dùng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f4f7f6; padding-top: 40px; }
+        .card { box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: none; border-radius: 10px; overflow: hidden; }
+        .table th { border-top: none; }
+        .table-hover tbody tr:hover { background-color: #f1f5f9; transition: 0.2s; }
+        .action-btn { width: 75px; margin: 2px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Phần Tiêu đề của Bảng -->
+            <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-3">
+                <h4 class="mb-0">Danh Sách Người Dùng</h4>
+                <a href="/crud" class="btn btn-success btn-sm font-weight-bold px-3">+ Thêm Mới</a>
+            </div>
+
+            <!-- Phần Nội dung Bảng -->
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0 text-center align-middle">
+                        <thead class="thead-light">
+                            <tr>
+                                <th># ID</th>
+                                <th>Email</th>
+                                <th>Họ Tên</th>
+                                <th>Địa Chỉ</th>
+                                <th>Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0; i < datalist.length; i++) { %>
+                            <tr>
+                                <td class="font-weight-bold text-secondary"><%= datalist[i].id %></td>
+                                <td><%= datalist[i].email %></td>
+                                <td><%= datalist[i].firstName %> <%= datalist[i].lastName %></td>
+                                <td><%= datalist[i].address %></td>
+                                <td>
+                                    <a href="/edit-crud?id=<%= datalist[i].id %>" class="btn btn-outline-primary action-btn">Sửa</a>
+                                    <!-- Thêm hàm confirm() để hỏi lại trước khi xóa -->
+                                    <a href="/delete-crud?id=<%= datalist[i].id %>" class="btn btn-outline-danger action-btn" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này? Hành động này không thể hoàn tác!');">Xóa</a>
+                                </td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
